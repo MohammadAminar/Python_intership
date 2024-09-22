@@ -1,0 +1,60 @@
+{% extends 'User/base.html' %}
+{% load static %}
+
+{% block page_Title %} افرودن دانش آموز جدید {% endblock %}
+
+{% block custom-css %}
+<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/jvmap/jquery-jvectormap.css' %}" rel="stylesheet">
+<link href="{% static 'vendor/datatables/css/buttons.dataTables.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/style-rtl.css' %}" rel="stylesheet">
+<style>
+    .content-body{
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block Content_body %}
+<div class="content-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12">
+                <div class="card profile-card card-bx m-b30">
+                    <div class="card-header">
+                        <h6 class="title">افرودن دانش آموز جدید</h6>
+                    </div>
+                    <form class="profile-form" action="save_student" method="post">
+                        {% csrf_token %}
+                        {% for item in student %}
+                        <div class="card-body">
+                            <div class="row">
+                                {{ item.label_tag }}
+                                {{ item }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">ثبت اطلاعات</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom-js %}
+<script src="{% static 'vendor/global/global.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-datepicker-master/js/bootstrap-datepicker.min.js' %}"></script>
+
+<script src="{% static 'js/custom.min.js' %}"></script>
+<script src="{% static 'js/deznav-init.js' %}"></script>
+
+<script src="{% static 'js/mds.bs.datetimepicker.js' %}"></script>
+{% endblock %}

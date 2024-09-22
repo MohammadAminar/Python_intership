@@ -1,0 +1,118 @@
+{% extends 'User/base.html' %}
+{% load static %}
+
+{% block page_Title %} والدین {% endblock %}
+
+{% block custom-css %}
+<link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+<link href="{% static 'vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/style-rtl.css' %}" rel="stylesheet">
+<style>
+    .content-body{
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock %}
+
+{% block Content_body %}
+<div class="content-body">
+    <div class="container-fluid mh-auto">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="bootstrap-modal">
+                            {% for item in parents %}
+                            <div class="modal fade" id="exampleModalCenter">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">حذف والدین</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>آیا از حذف والدین مورد نظر اطمینان دارید؟</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">بستن</button>
+                                            <a type="button" class="btn btn-primary" href="delete_parent/{{ item.Parent_Id }}">بله</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="card-body px-0">
+                        <a href="/add_parent" class="btn btn-primary btn-sm ms-2 mx-2">+ افرودن والدین جدید</a>
+                        <div class="table-responsive">
+                            <table class="table table-sm mb-0 table-striped student-tbl">
+                                <thead>
+                                    <tr>
+                                        <th class=" pe-3">
+                                            <div class="form-check custom-checkbox mx-2">
+                                                <input type="checkbox" class="form-check-input" id="checkAll">
+                                                <label class="form-check-label" for="checkAll"></label>
+                                            </div>
+                                        </th>
+                                        <th>نام</th>
+                                        <th>نام خانوادگی</th>
+                                        <th>تلفن</th>
+                                        <th>کد ملی</th>
+                                        <th>نام کابری</th>
+                                        <th>رمز عبور</th>
+                                        <th>تعداد فرزندان در این مدرسه</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="customers">
+                                    {% for item in parents %}
+                                    <tr class="btn-reveal-trigger">
+                                        <td class="py-2">
+                                            <div class="form-check custom-checkbox mx-2">
+                                                <input type="checkbox" class="form-check-input" id="checkbox1">
+                                                <label class="form-check-label" for="checkbox1"></label>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <h6 class="mb-0 fs--1">{{ item.user.Firstname }}</h6>
+                                        </td>
+                                        <td class="py-2">{{ item.user.Lastname }}</td>
+                                        <td class="py-2">{{ item.user.Phone }}</td>
+                                        <td class="py-2">{{ item.user.International_Code }}</td>
+                                        <td class="py-2">{{ item.user.Username }}</td>
+                                        <td class="py-2">{{ item.user.Password }}</td>
+                                        <td class="py-2">{{ item.Number_of_children }}</td>
+                                        <td class="py-2 text-end">
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary tp-btn-light sharp" type="button" data-bs-toggle="dropdown"><span class="fs--1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg></span></button>
+                                                <div class="dropdown-menu dropdown-menu-end border py-0">
+                                                    <div class="py-2">
+                                                        <a class="dropdown-item" href="search_parent/{{ item.Parent_Id }}">ویرایش</a>
+                                                        <button type="button" class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">حذف</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block custom-js %}
+<script src="{% static 'vendor/global/global.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'js/custom.min.js' %}"></script>
+<script src="{% static 'js/deznav-init.js' %}"></script>
+{% endblock %}

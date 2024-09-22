@@ -1,0 +1,30 @@
+{% load static %}
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_Title %}{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+	{% block custom-css %}
+	{% endblock %}
+</head>
+<body>
+    <div id="preloader">
+		<div>
+			<img src="{% static 'images/pre.gif' %}" alt=""> 
+		</div>
+    </div>
+
+    <div id="main-wrapper">
+        <a type="button" href="/teachers" class="btn btn-primary">معلمین</a>
+        <a type="button" href="/students" class="btn btn-primary">دانش آموزان</a>
+        <a type="button" href="/parents" class="btn btn-primary">والدین</a>
+        <a type="button" href="/managers" class="btn btn-primary">مدیران</a>
+        {% block Content_body %}
+        {% endblock %}
+	</div>
+
+    <!-- Required vendors -->
+	{% block custom-js %}
+	{% endblock %}
+</body>
+</html>
